@@ -1,8 +1,6 @@
 FROM ubuntu:18.04
 
-
-LABEL maintainer="Kimsanbaev_Sunnatullo"
-
+# LABEL maintainer= "Кимсанбаев_Суннатулло"
 
 ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -12,11 +10,9 @@ RUN apt-get install qtbase5-dev -y
 RUN apt-get install qt5-qmake
 RUN apt-get install build-essential -y
 
+COPY . .
 
-COPY . /221-351_Kimsanbaev_Sunnatullo
-
-
-WORKDIR /221-351_Kimsanbaev_Sunnatullo
+WORKDIR /root/
 RUN qmake -project
 RUN qmake
 RUN make
@@ -24,5 +20,4 @@ RUN make
 ARG SERVER_STRING="Hello, World!!! I am echo server!"
 ENV SERVER_STRING_ENV=$SERVER_STRING
 
-
-CMD ["./mySer", "$SERVER_STRING_ENV"]
+CMD ["./myser", "$SERVER_STRING_ENV"]
